@@ -11,8 +11,20 @@ export const usersApi = createApi({
             query: () => "java-59", // URL-эндпоинт
             providesTags: ["Users"], // Полученные данные помечаются тегом
         }),
+        createUser: builder.mutation<User, Partial<User>>({
+            query: (user) => ({
+                url: "java-59", // 👈 API-эндпоинт для POST-запроса
+                method: "POST",
+                body: user, // 👈 Отправляем нового пользователя
+            }),
+            invalidatesTags: ["Users"], // 👈 После создания пользователя список обновляется
+        }),
     }),
+
+
 });
 
+
+
 // Экспортируем хук для получения данных
-export const { useGetUsersQuery } = usersApi;
+export const { useGetUsersQuery,  useCreateUserMutation } = usersApi;
