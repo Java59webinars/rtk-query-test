@@ -19,6 +19,14 @@ export const usersApi = createApi({
             }),
             invalidatesTags: ["Users"], // 👈 После создания пользователя список обновляется
         }),
+        updateUser: builder.mutation<User, { id: string; name: string }>({
+            query: ({ id, ...patch }) => ({
+                url: `java-59/${id}`,
+                method: 'PUT',
+                body: patch,
+            }),
+            invalidatesTags: ['Users'],
+        }),
     }),
 
 
@@ -27,4 +35,4 @@ export const usersApi = createApi({
 
 
 // Экспортируем хук для получения данных
-export const { useGetUsersQuery,  useCreateUserMutation } = usersApi;
+export const { useGetUsersQuery,  useCreateUserMutation, useUpdateUserMutation  } = usersApi;
